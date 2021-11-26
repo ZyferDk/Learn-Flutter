@@ -1,107 +1,126 @@
 import 'package:flutter/material.dart';
-import 'package:the_net_ninja/components/button_icon.dart';
 
 void main() => runApp(const MaterialApp(
-      home: Home(),
+      home: NinjaCard(),
     ));
 
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+class NinjaCard extends StatefulWidget {
+  const NinjaCard({Key? key}) : super(key: key);
+
+  @override
+  _NinjaCardState createState() => _NinjaCardState();
+}
+
+class _NinjaCardState extends State<NinjaCard> {
+  int ninjaLevel = 0;
+
+  addNumber() {
+    setState(() {
+      ninjaLevel += 1;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[900],
       appBar: AppBar(
-        title: const Text('App'),
+        title: const Text('Ninja ID Card'),
         centerTitle: true,
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.grey[850],
+        elevation: 0.0,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: addNumber,
+        backgroundColor: Colors.grey[800],
+        child: const Icon(Icons.add),
       ),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0),
+        padding: const EdgeInsets.fromLTRB(30, 40, 30, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const Center(
               child: CircleAvatar(
-                radius: 40.0,
-                backgroundImage: AssetImage('assets/thumb.jpg'),
+                radius: 40,
+                backgroundImage: AssetImage('assets/img/thumb.jpg'),
               ),
             ),
             Divider(
               color: Colors.grey[800],
-              height: 60.0,
+              height: 60,
             ),
             const Text(
               'NAME',
               style: TextStyle(
                 color: Colors.grey,
-                letterSpacing: 2.0,
+                letterSpacing: 2,
               ),
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10),
             Text(
-              'Chun-Li',
+              'Suraji bin Dakun',
               style: TextStyle(
                 color: Colors.amberAccent[200],
                 fontWeight: FontWeight.bold,
-                fontSize: 28.0,
-                letterSpacing: 2.0,
+                fontSize: 28,
+                letterSpacing: 2,
               ),
             ),
-            SizedBox(height: 30.0),
-            Text(
-              'HOMETOWN',
+            const SizedBox(height: 30),
+            const Text(
+              'ADDRESS',
               style: TextStyle(
                 color: Colors.grey,
-                letterSpacing: 2.0,
+                letterSpacing: 2,
               ),
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10),
             Text(
-              'Beijing, China',
+              'Sidomakmur, Penawartama',
               style: TextStyle(
                 color: Colors.amberAccent[200],
                 fontWeight: FontWeight.bold,
-                fontSize: 28.0,
-                letterSpacing: 2.0,
+                fontSize: 28,
+                letterSpacing: 2,
               ),
             ),
-            SizedBox(height: 30.0),
-            Text(
+            const SizedBox(height: 30),
+            const Text(
               'CURRENT NINJA LEVEL',
               style: TextStyle(
                 color: Colors.grey,
-                letterSpacing: 2.0,
+                letterSpacing: 2,
               ),
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10),
             Text(
-              '8',
+              '$ninjaLevel',
               style: TextStyle(
                 color: Colors.amberAccent[200],
                 fontWeight: FontWeight.bold,
-                fontSize: 28.0,
-                letterSpacing: 2.0,
+                fontSize: 28,
+                letterSpacing: 2,
               ),
             ),
-            SizedBox(height: 30.0),
+            const SizedBox(height: 30),
             Row(
               children: <Widget>[
                 Icon(
                   Icons.email,
                   color: Colors.grey[400],
                 ),
-                SizedBox(width: 10.0),
+                const SizedBox(width: 10),
                 Text(
-                  'chun.li@thenetninja.co.uk',
+                  'surajidk12@gmail.com',
                   style: TextStyle(
-                    color: Colors.grey[400],
-                    fontSize: 18.0,
-                    letterSpacing: 1.0,
+                    color: Colors.grey.shade200,
+                    fontSize: 18,
+                    letterSpacing: 1,
                   ),
-                )
+                ),
               ],
-            ),
+            )
           ],
         ),
       ),
