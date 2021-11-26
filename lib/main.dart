@@ -20,6 +20,12 @@ class _NinjaCardState extends State<NinjaCard> {
     });
   }
 
+  List<String> quotes = [
+    'Be yourself; everyone else is already taken',
+    'I have nothing to declare except my genius',
+    'The truth is rarely pure and never simple',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,94 +41,22 @@ class _NinjaCardState extends State<NinjaCard> {
         backgroundColor: Colors.grey[800],
         child: const Icon(Icons.add),
       ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(30, 40, 30, 0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            const Center(
-              child: CircleAvatar(
-                radius: 40,
-                backgroundImage: AssetImage('assets/img/thumb.jpg'),
-              ),
-            ),
-            Divider(
-              color: Colors.grey[800],
-              height: 60,
-            ),
-            const Text(
-              'NAME',
-              style: TextStyle(
-                color: Colors.grey,
-                letterSpacing: 2,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Suraji bin Dakun',
-              style: TextStyle(
-                color: Colors.amberAccent[200],
-                fontWeight: FontWeight.bold,
-                fontSize: 28,
-                letterSpacing: 2,
-              ),
-            ),
-            const SizedBox(height: 30),
-            const Text(
-              'ADDRESS',
-              style: TextStyle(
-                color: Colors.grey,
-                letterSpacing: 2,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Sidomakmur, Penawartama',
-              style: TextStyle(
-                color: Colors.amberAccent[200],
-                fontWeight: FontWeight.bold,
-                fontSize: 28,
-                letterSpacing: 2,
-              ),
-            ),
-            const SizedBox(height: 30),
-            const Text(
-              'CURRENT NINJA LEVEL',
-              style: TextStyle(
-                color: Colors.grey,
-                letterSpacing: 2,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              '$ninjaLevel',
-              style: TextStyle(
-                color: Colors.amberAccent[200],
-                fontWeight: FontWeight.bold,
-                fontSize: 28,
-                letterSpacing: 2,
-              ),
-            ),
-            const SizedBox(height: 30),
-            Row(
-              children: <Widget>[
-                Icon(
-                  Icons.email,
-                  color: Colors.grey[400],
-                ),
-                const SizedBox(width: 10),
-                Text(
-                  'surajidk12@gmail.com',
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: quotes
+            .map(
+              (quote) => Center(
+                child: Text(
+                  quote,
                   style: TextStyle(
-                    color: Colors.grey.shade200,
-                    fontSize: 18,
-                    letterSpacing: 1,
+                    color: Colors.amberAccent[200],
+                    fontSize: 16,
                   ),
                 ),
-              ],
+              ),
             )
-          ],
-        ),
+            .toList(),
       ),
     );
   }
