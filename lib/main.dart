@@ -1,17 +1,19 @@
+import 'package:belajar_flutter/quote.dart';
+import 'package:belajar_flutter/quote_card.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MaterialApp(
-      home: NinjaCard(),
+      home: QuoteList(),
     ));
 
-class NinjaCard extends StatefulWidget {
-  const NinjaCard({Key? key}) : super(key: key);
+class QuoteList extends StatefulWidget {
+  const QuoteList({Key? key}) : super(key: key);
 
   @override
-  _NinjaCardState createState() => _NinjaCardState();
+  _QuoteListState createState() => _QuoteListState();
 }
 
-class _NinjaCardState extends State<NinjaCard> {
+class _QuoteListState extends State<QuoteList> {
   int ninjaLevel = 0;
 
   addNumber() {
@@ -20,10 +22,14 @@ class _NinjaCardState extends State<NinjaCard> {
     });
   }
 
-  List<String> quotes = [
-    'Be yourself; everyone else is already taken',
-    'I have nothing to declare except my genius',
-    'The truth is rarely pure and never simple',
+  List<Quote> quotes = [
+    Quote(text: 'Be yourself; everyone else is already taken', author: 'ajidk'),
+    Quote(
+        text: 'I have nothing to declare except my genius', author: 'andrean'),
+    Quote(
+        text: 'Life is what happens when you’re busy.', author: 'john lennon'),
+    Quote(
+        text: 'The purpose of our lives is to be happy.', author: 'Diana lama'),
   ];
 
   @override
@@ -31,7 +37,7 @@ class _NinjaCardState extends State<NinjaCard> {
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
-        title: const Text('Ninja ID Card'),
+        title: const Text('Awesome Quotes'),
         centerTitle: true,
         backgroundColor: Colors.grey[850],
         elevation: 0.0,
@@ -42,20 +48,10 @@ class _NinjaCardState extends State<NinjaCard> {
         child: const Icon(Icons.add),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: quotes
-            .map(
-              (quote) => Center(
-                child: Text(
-                  quote,
-                  style: TextStyle(
-                    color: Colors.amberAccent[200],
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-            )
+            .map((quote) => QuoteCard(
+                  quote: quote,
+                ))
             .toList(),
       ),
     );
