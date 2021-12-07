@@ -1,7 +1,5 @@
+import 'package:belajar_flutter/services/word_time.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-
-import 'dart:convert';
 
 class Loading extends StatefulWidget {
   const Loading({Key? key}) : super(key: key);
@@ -11,39 +9,33 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
-  var testing = 'Loading Screen';
+  var time = 'Loading';
+  var location = 'Asia/Jakarta';
 
-  void getData() async {
-    var url = Uri.parse('https://jsonplaceholder.typicode.com/todos/5');
-    var response = await http.get(url);
+  void setUpWorldTime() async {
+    WorldTime instance =
+        WorldTime(location: 'Jakarta', urlLocation: 'Asia/Jakarta');
+    await instance.getTime();
 
-    Map data = jsonDecode(response.body);
-
-    String title = await Future.delayed(const Duration(seconds: 3), () {
-      return data['title'];
+    setState(() {
+      time = instance.time;
+      location = instance.location;
     });
 
-    print(title);
-  }
-
-  void getTime() async {
-    var url = Uri.parse('https://worldtimeapi.org/api/timezone/Asia/Jakarta');
-    var response = await http.get(url);
-    Map data = jsonDecode(response.body);
-    // print(data);
-    String datetime = data['datetime'];
-    String offset = data['utc_offset'].substring(1, 3);
-
-    DateTime now = DateTime.parse(datetime);
-    now = now.add(Duration(hours: int.parse(offset)));
-    print(now);
+    Future.delayed(const Duration(seconds: 15), () {
+      return Navigator.pushReplacementNamed(context, '/home', arguments: {
+        'location': instance.location,
+        'time': instance.time,
+      });
+    });
   }
 
   @override
   void initState() {
     super.initState();
-    // getData();
-    getTime();
+    // ignore: avoid_print
+    print('hadir pak');
+    setUpWorldTime();
   }
 
   @override
@@ -51,12 +43,25 @@ class _LoadingState extends State<Loading> {
     return Scaffold(
       backgroundColor: Colors.blueGrey.shade400,
       body: Center(
-        child: Text(
-          testing,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 20.0,
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              location,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 20.0,
+              ),
+            ),
+            Text(
+              time,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 20.0,
+              ),
+            ),
+          ],
         ),
       ),
     );

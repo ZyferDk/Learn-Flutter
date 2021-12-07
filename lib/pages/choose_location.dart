@@ -9,6 +9,7 @@ class ChooseLocation extends StatefulWidget {
 
 class _ChooseLocationState extends State<ChooseLocation> {
   int counter = 0;
+  String title = '';
 
   void addCounter() {
     setState(() {
@@ -17,14 +18,17 @@ class _ChooseLocationState extends State<ChooseLocation> {
   }
 
   void getData() async {
-    String username = await Future.delayed(const Duration(seconds: 3), () {
+    String username = await Future.delayed(const Duration(seconds: 10), () {
       return 'yoshi';
     });
 
-    String bio = await Future.delayed(const Duration(seconds: 2), () {
+    String bio = await Future.delayed(const Duration(seconds: 10), () {
       return 'vegan, musician & egg collector';
     });
 
+    setState(() {
+      title = bio;
+    });
     // ignore: avoid_print
     print('$username - $bio');
   }
@@ -48,9 +52,14 @@ class _ChooseLocationState extends State<ChooseLocation> {
         elevation: 0,
       ),
       body: Center(
-        child: ElevatedButton(
-          onPressed: addCounter,
-          child: Text('$counter'),
+        child: Column(
+          children: [
+            Text(title),
+            ElevatedButton(
+              onPressed: addCounter,
+              child: Text('$counter'),
+            ),
+          ],
         ),
       ),
     );
